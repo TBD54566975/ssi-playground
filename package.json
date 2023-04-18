@@ -1,0 +1,23 @@
+{
+  "name": "ssi-playground",
+  "version": "1.0.0",
+  "description": "playground for experimenting with the ssi service",
+  "main": "index.js",
+  "proxy": "http://localhost:8080",
+  "scripts": {
+    "start": "http-server -p 8081"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kirahsapong/ssi-playground.git"
+  },
+  "author": "kirah sapong",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kirahsapong/ssi-playground/issues"
+  },
+  "homepage": "https://github.com/kirahsapong/ssi-playground#readme",
+  "dependencies": {
+    "http-proxy": "^1.18.1"
+  }
+}

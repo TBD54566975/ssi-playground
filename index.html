@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Playground</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+        <link rel="stylesheet" type="text/css" href="assets/styles.css">
+    </head>
+    <body>
+        <header>
+            <div>
+                <img src="assets/tbd-wordmark.svg" alt="TBD logo" width="60"/>
+                <span class="lowercase">Playground</span>
+            </div>
+            <a target="_blank" href="https://developer.tbd.website/docs/" class="button-anchor">Read the docs</a>
+        </header>
+        <main>
+            <div class="playground-intro">
+                <h1>Playground</h1>
+                <p>Experiment with different issuance flows or explore how the different methods behave. 
+                    We’ve pre-populated test DIDs for you to use.
+                </p>
+            </div>
+            <div class="playground-area">
+                <section>
+                    <div class="section-header">
+                        <h2>Configure request</h2>
+                        <div id="dids-container">
+                            <p>Loading DIDs...</p>
+                        </div>
+                    </div>
+                    <form>
+                        <div id="endpoint-container">
+                            <label for="endpoint">Endpoint</label>
+                            <div class="select-area">
+                                <select id="endpoint" name="endpoint" required></select>
+                            </div>
+                        </div>
+                        <div id="pathParam-container"></div>
+                        <div id="method-container">
+                            <label for="method">Method</label>
+                            <div class="select-area">
+                                <select id="method" name="method" required></select>
+                            </div>
+                        </div>
+                        <div id="queryParam-container"></div>
+                        <div id="queryParamID-container"></div>
+                        <div id="template-container">
+                            <label for="template">Populate payload from template</label>
+                            <div class="select-area">
+                                <select id="template" name="template"></select>
+                            </div>
+                        </div>
+                        <div id="body-container">
+                            <label for="body">Body:</label>
+                            <textarea id="body" name="body"></textarea>
+                        </div>
+                        <a target="_blank" href="https://developer.tbd.website/docs/">Read the API docs</a>
+                        <div class="button-container">
+                            <button type="submit">Send</button>
+                        </div>
+                    </form>
+                </section>
+                <section>
+                    <div class="section-header">
+                        <h2>Response</h2>
+                    </div>
+                    <div id="output-container">
+                        <pre id="output"></pre>
+                    </div>
+                    <div class="button-container">
+                        <button type="reset" id="reset-button" class="secondary">Reset</button>
+                    </div>
+                </section>
+            </div>
+        </main>
+        <footer>
+            <a target="_blank" href="https://github.com/kirahsapong/ssi-playground">Github</a>
+            <a target="_blank" href="https://www.tbd.website/">tbd.website</a>
+        </footer>
+        <script src="js/populateDIDs.js"></script>
+        <script src="js/populateForm.js"></script>
+        <script src="js/changeForm.js"></script>
+        <script src="js/submitForm.js"></script>
+    </body>
+</html>
