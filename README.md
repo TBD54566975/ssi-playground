@@ -1,11 +1,12 @@
-# $PROJECT_NAME README
+# SSI Playground
 
-Congrats, project leads! You got a new project to grow!
-
-This stub is meant to help you form a strong community around your work. It's yours to adapt, and may 
-diverge from this initial structure. Just keep the files seeded in this repo, and the rest is yours to evolve! 
+The SSI Playground is meant to help orient new faces into the SSI ecosystem. 
 
 ## Introduction
+
+It relies on the [SSI Service](https://github.com/TBD54566975/ssi-service), so make sure to get that project pulled down and running locally. 
+
+Use `npm run start` to start running the playground locally. 
 
 Orient users to the project here. This is a good place to start with an assumption
 that the user knows very little - so start with the Big Picture and show how this

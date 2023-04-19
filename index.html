@@ -9,7 +9,7 @@
     </head>
     <body>
         <header>
-            <div>
+            <div class="header-logo">
                 <img src="assets/tbd-wordmark.svg" alt="TBD logo" width="60"/>
                 <span class="lowercase">Playground</span>
             </div>
@@ -19,7 +19,7 @@
             <div class="playground-intro">
                 <h1>Playground</h1>
                 <p>Experiment with different issuance flows or explore how the different methods behave. 
-                    We’ve pre-populated test DIDs for you to use.
+                    We’ve pre-populated test data and IDs for you to use.
                 </p>
             </div>
             <div class="playground-area">
@@ -31,6 +31,27 @@
                         </div>
                     </div>
                     <form>
+                        <div id="method-container">
+                            <!-- <label for="method">Method</label> -->
+                            <!-- <div class="select-area">
+                                <select id="method" name="method" required></select>
+                            </div> -->
+                            <fieldset required id="method">
+                                <legend for="method">Method</legend>
+                                <div class="radio-button">
+                                    <input type="radio" id="method-get-radio" name="method" value="GET" checked>
+                                    <label for="method-get-radio">GET</label>
+                                </div>              
+                                <div class="radio-button">
+                                    <input type="radio" id="method-put-radio" name="method" value="PUT">
+                                    <label for="method-put-radio">PUT</label>
+                                </div>
+                                <div class="radio-button">
+                                    <input type="radio" id="method-delete-radio" name="method" value="DELETE">
+                                    <label for="method-delete-radio">DELETE</label>
+                                </div>
+                            </fieldset>
+                        </div>
                         <div id="endpoint-container">
                             <label for="endpoint">Endpoint</label>
                             <div class="select-area">
@@ -38,20 +59,9 @@
                             </div>
                         </div>
                         <div id="pathParam-container"></div>
-                        <div id="method-container">
-                            <label for="method">Method</label>
-                            <div class="select-area">
-                                <select id="method" name="method" required></select>
-                            </div>
-                        </div>
                         <div id="queryParam-container"></div>
                         <div id="queryParamID-container"></div>
-                        <div id="template-container">
-                            <label for="template">Populate payload from template</label>
-                            <div class="select-area">
-                                <select id="template" name="template"></select>
-                            </div>
-                        </div>
+                        <div id="template-container"></div>
                         <div id="body-container">
                             <label for="body">Body:</label>
                             <textarea id="body" name="body"></textarea>
@@ -79,7 +89,7 @@
             <a target="_blank" href="https://github.com/kirahsapong/ssi-playground">Github</a>
             <a target="_blank" href="https://www.tbd.website/">tbd.website</a>
         </footer>
-        <script src="js/populateDIDs.js"></script>
+        <script src="js/populateTestData.js"></script>
         <script src="js/populateForm.js"></script>
         <script src="js/changeForm.js"></script>
         <script src="js/submitForm.js"></script>

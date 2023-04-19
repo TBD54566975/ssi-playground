@@ -113,7 +113,6 @@ header,
 main,
 footer {
     margin: var(--site-margin);
-    padding: var(--site-padding);
 }
 
 header {
@@ -121,10 +120,14 @@ header {
     justify-content: space-between;
     padding: 2rem 0;
     border-bottom: 2px solid var(--color-yellow);
+    gap: 2rem;
 }
 
 main {
     padding: 2rem 0;
+    background-image: url("/assets/rocket.svg");
+    background-repeat: no-repeat;
+    background-position: 25% 0%;
 }
 
 footer {
@@ -137,13 +140,31 @@ footer {
     gap: 2rem;
 }
 
+.header-logo {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+}
+
 .playground-intro {
     color: var(--color-yellow);
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.playground-intro > * {
+    flex: 1;
+}
+
+.playground-intro > h1 {
+    margin-top: 0;
 }
 
 .playground-area {
     display: flex;
     gap: 2rem;
+    flex-wrap: wrap;
 }
 
 .playground-area section {
@@ -152,6 +173,7 @@ footer {
     background: var(--grey-5);
     border-radius: var(--radius-sm);
     padding: 1.5rem;
+    max-width: 50%;
 }
 
 .section-header {
@@ -174,14 +196,20 @@ p {
     font-size: var(--font-md);
 }
 
-.note-sm {
+.note-key,
+.note-value {
+    display: inline-block;
     font-size: var(--font-sm);
     margin-top: 0.25rem;
+}
+
+.note-value {
     color: var(--grey-50);
+    font-weight: 500;
+    word-break: break-word;
 }
 
 label,
-.note-xs,
 legend {
     font-size: var(--font-xs);
     display: block;
@@ -251,7 +279,8 @@ input[type="radio"]:checked ~ label {
 }
 
 textarea {
-    height: 200px;
+    min-height: 200px;
+    font-weight: 400;
 }
 
 .lowercase {
@@ -268,6 +297,7 @@ textarea {
 
 #output {
     white-space: pre-wrap;
+    word-wrap: break-word;
 }
 
 select {
@@ -283,4 +313,15 @@ select {
     height: 100%;
     display: flex;
     align-items: center;
+}
+
+@media screen and (max-width: 998px) {
+    :root {
+        --site-margin: 0 1rem;
+    }
+
+    .playground-area section,
+    .playground-intro > * {
+        min-width: 100%;
+    }
 }

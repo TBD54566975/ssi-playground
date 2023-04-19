@@ -1,70 +1,84 @@
 const defaultOption = `<option value="" disabled selected>Select one</option>`
 
-const endpoints = document.querySelector('#endpoint');
-const availableEndpoints = [
+//Endpoints
+const getOptions = [
     '/health',
     '/readiness',
     '/v1/credentials',
     '/v1/credentials/{id}',
     '/v1/credentials/{id}/status',
     '/v1/dids',
+    '/v1/dids/key',
+    '/v1/dids/web',
+    '/v1/dids/ion',
+    '/v1/dids/key/{id}',
+    '/v1/dids/web/{id}',
+    '/v1/dids/ion/{id}',
     '/v1/dids/resolver/{id}',
-    '/v1/issuancetemplates',
     '/v1/issuancetemplates/{id}',
-    '/v1/keys',
     '/v1/keys/{id}',
     '/v1/manifests',
     '/v1/manifests/{id}',
-    '/v1/manifests/applications',
     '/v1/manifests/applications/{id}',
-    '/v1/manifests/applications/{id}/review',
     '/v1/manifests/responses',
     '/v1/manifests/responses/{id}',
-    '/v1/operations',
     '/v1/operations/{id}',
     '/v1/operations/cancel/{id}',
     '/v1/presentations/definitions',
     '/v1/presentations/definitions/{id}',
     '/v1/presentations/submissions',
     '/v1/presentations/submissions/{id}',
-    '/v1/presentations/submissions/{id}/review',
     '/v1/schemas',
     '/v1/schemas/{id}',
     '/v1/webhooks'
 ];
-const methods = document.querySelector('#method');
-const availableMethods = [
-    'GET',
-    'PUT',
-    'DELETE'
+
+const putOptions = [
+    '/v1/credentials',
+    '/v1/credentials/{id}/status',
+    '/v1/dids/key',
+    '/v1/dids/web',
+    '/v1/dids/ion',
+    '/v1/issuancetemplates',
+    '/v1/keys',
+    '/v1/manifests',
+    '/v1/manifests/applications',
+    '/v1/manifests/applications/{id}/review',
+    '/v1/presentations/definitions',
+    '/v1/presentations/submissions',
+    '/v1/presentations/submissions/{id}/review',
+    '/v1/schemas',
+    '/v1/webhooks'
 ];
-const templates = document.querySelector('#template');
-const availableTemplates = [
-    'Custom',
+
+const deleteOptions = [
+    '/v1/credentials/{id}',
+    '/v1/dids/key/{id}',
+    '/v1/dids/web/{id}',
+    '/v1/dids/ion/{id}',
+    '/v1/issuancetemplates/{id}',
+    '/v1/keys/{id}',
+    '/v1/manifests/{id}',
+    '/v1/manifests/applications/{id}',
+    '/v1/manifests/responses/{id}',
+    '/v1/presentations/definitions/{id}',
+    '/v1/schemas/{id}'
 ];
 
 const populateEndpoints = () => {
+    let availableEndpoints = getOptions;
+    if (document.querySelector('#method-put-radio').checked) {
+        availableEndpoints = putOptions;
+    } else if (document.querySelector('#method-delete-radio').checked) {
+        availableEndpoints = deleteOptions;
+    }
     const endpointOptions = availableEndpoints
         .map(endpoint => `<option value="${endpoint}">${endpoint.trim()}</option>`)
         .join('');
-    endpoints.innerHTML = defaultOption + endpointOptions;
-}
+    document.querySelector('#endpoint').innerHTML = defaultOption + endpointOptions;
+};
 
-const populateMethods = () => {
-    const methodOptions = availableMethods
-        .map(method => `<option value="${method}">${method.trim()}</option>`)
-        .join('');
-    methods.innerHTML = defaultOption + methodOptions;
-}
-
-const populateTemplates = () => {
-    const templateOptions = availableTemplates
-        .map(template => `<option value="${template}">${template.trim()}</option>`)
-        .join('');
-    templates.innerHTML = defaultOption + templateOptions;
-}
-
-
+//Icons
 const setLinkIcons = () => {
     const linkIcon = `
         <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -92,8 +106,11 @@ const setSelectIcons = () => {
     });
 }
 
-populateEndpoints();
-populateMethods();
-populateTemplates();
+//Populate form and add event listener
 setLinkIcons();
 setSelectIcons();
+populateEndpoints();
+
+method.addEventListener('change', () => {
+    populateEndpoints();
+});

@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "playground for experimenting with the ssi service",
   "main": "index.js",
-  "proxy": "http://localhost:8080",
   "scripts": {
     "start": "http-server -p 8081"
   },

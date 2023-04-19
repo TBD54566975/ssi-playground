@@ -22,11 +22,11 @@ form.addEventListener('submit', (event) => {
   }
 
   fetch(`${endpointSelection}`, {
-    methodSelection,
+    method: methodSelection,
     headers: {
       'Content-Type': 'application/json'
     },
-    bodySelection
+    ...bodySelection.length > 0 && { body: bodySelection }
   })
     .then((response) => response.json())
     .then((text) => {

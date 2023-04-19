@@ -33,185 +33,166 @@ const queryParam = document.querySelector('#queryParam-container');
 const queryParamID = document.querySelector('#queryParamID-container');
 const pathParam = document.querySelector('#pathParam-container');
 
-method.addEventListener('change', () => {
-
-    const onFilterByChange = (event) => {
-        const selectedFilterBy = event.target.value;
-        if (selectedFilterBy === 'none') {
-            queryParamID.innerHTML = '';
-        } else {
-            queryParamID.innerHTML = filterByID;
-            const queryParamLabel = document.querySelector('label[for="filter-id"]');
-            if (selectedFilterBy === 'issuer') {
-                queryParamLabel.textContent = "Issuer ID";
-            } else if (selectedFilterBy === 'subject') {
-                queryParamLabel.textContent = "Subject ID";
-            } else if (selectedFilterBy === 'schema') {
-                queryParamLabel.textContent = "Schema ID";
-            }
+const onFilterByChange = (event) => {
+    const selectedFilterBy = event.target.value;
+    if (selectedFilterBy === 'none') {
+        queryParamID.innerHTML = '';
+    } else {
+        queryParamID.innerHTML = filterByID;
+        const queryParamLabel = document.querySelector('label[for="filter-id"]');
+        if (selectedFilterBy === 'issuer') {
+            queryParamLabel.textContent = "Issuer ID";
+        } else if (selectedFilterBy === 'subject') {
+            queryParamLabel.textContent = "Subject ID";
+        } else if (selectedFilterBy === 'schema') {
+            queryParamLabel.textContent = "Schema ID";
         }
-    };
+    }
+}
 
-    const addQueryParamFieldsToForm = () => {
-        queryParam.innerHTML = filterByRadio;
-        const filterByRadios = document.querySelectorAll('input[name="filter-by"]');
+const addQueryParamFieldsToForm = () => {
+    queryParam.innerHTML = filterByRadio;
+    const filterByRadios = document.querySelectorAll('input[name="filter-by"]');
 
+    filterByRadios.forEach(radio => {
+        radio.removeEventListener('change', onFilterByChange);
+        radio.addEventListener('change', onFilterByChange);
+    });
+}
+
+const removeQueryParamFieldsFromForm = () => {
+    const filterByRadios = document.querySelectorAll('input[name="filter-by"]');
+
+    if (filterByRadios.length) {
         filterByRadios.forEach(radio => {
             radio.removeEventListener('change', onFilterByChange);
-            radio.addEventListener('change', onFilterByChange);
         });
     }
+    queryParam.innerHTML = '';
+    queryParamID.innerHTML = '';
+}
 
-    const removeQueryParamFieldsFromForm = () => {
-        const filterByRadios = document.querySelectorAll('input[name="filter-by"]');
+endpoint.addEventListener('change', (e) => {
 
-        if (filterByRadios.length) {
-            filterByRadios.forEach(radio => {
-                radio.removeEventListener('change', onFilterByChange);
-            });
+    if (document.querySelector('#method-get-radio').checked) {
+        if (endpoint.value === '/v1/credentials' || endpoint.value === '/v1/manifests') {
+            addQueryParamFieldsToForm();
+        } else {
+            removeQueryParamFieldsFromForm(); 
         }
-        queryParam.innerHTML = '';
-        queryParamID.innerHTML = '';
     }
 
-    if (method.value === 'GET' && (endpoint.value === '/v1/credentials' || endpoint.value === '/v1/manifests')) {
-        addQueryParamFieldsToForm();
-    } else {
-        removeQueryParamFieldsFromForm(); 
-    }
-
-})
-
-endpoint.addEventListener('change', () => {
     if(endpoint.value.includes('{id}')) {
         pathParam.innerHTML = pathParamIDField;
     } else {
         pathParam.innerHTML = '';
     };
-
-    method.value = '';
-    queryParam.innerHTML = '';
-    queryParamID.innerHTML = '';
-
-    const getOption = document.querySelector('option[value="GET"]');
-    const putOption = document.querySelector('option[value="PUT"]');
-    const deleteOption = document.querySelector('option[value="DELETE"]');
-
-    getOption.setAttribute('disabled', 'true');
-    putOption.setAttribute('disabled', 'true');
-    deleteOption.setAttribute('disabled', 'true');
-    
-    switch (endpoint.value) {
-        case '/health':
-            getOption.removeAttribute('disabled');
-            break;
-        case '/readiness':
-            getOption.removeAttribute('disabled');
-            break;
-        case '/v1/credentials':
-            getOption.removeAttribute('disabled');
-            putOption.removeAttribute('disabled');
-
-            break;
-        case '/v1/credentials/{id}':
-            getOption.removeAttribute('disabled');
-            deleteOption.removeAttribute('disabled');
-            break;
-        case '/v1/credentials/{id}/status':
-            getOption.removeAttribute('disabled');
-            putOption.removeAttribute('disabled');
-            break;
-        case '/v1/dids':
-            getOption.removeAttribute('disabled');
-            break;
-        case '/v1/dids/resolver/{id}':
-            getOption.removeAttribute('disabled');
-            break;
-        case '/v1/issuancetemplates':
-            putOption.removeAttribute('disabled');
-            break;
-        case '/v1/issuancetemplates/{id}':
-            getOption.removeAttribute('disabled');
-            deleteOption.removeAttribute('disabled');
-            break;
-        case '/v1/keys':
-            putOption.removeAttribute('disabled');
-            break;
-        case '/v1/keys/{id}':
-            getOption.removeAttribute('disabled');
-            deleteOption.removeAttribute('disabled');
-            break;
-        case '/v1/manifests':
-            getOption.removeAttribute('disabled');
-            putOption.removeAttribute('disabled');
-            break;
-        case '/v1/manifests/{id}':
-            getOption.removeAttribute('disabled');
-            deleteOption.removeAttribute('disabled');
-            break;
-        case '/v1/manifests/applications':
-            getOption.removeAttribute('disabled');
-            putOption.removeAttribute('disabled');
-            break;
-        case '/v1/manifests/applications/{id}':
-            getOption.removeAttribute('disabled');
-            deleteOption.removeAttribute('disabled');
-            break;
-        case '/v1/manifests/applications/{id}/review':
-            putOption.removeAttribute('disabled');
-            break;
-        case '/v1/manifests/responses':
-            getOption.removeAttribute('disabled');
-            break;
-        case '/v1/manifests/responses/{id}':
-            getOption.removeAttribute('disabled');
-            deleteOption.removeAttribute('disabled');
-            break;
-        case '/v1/operations':
-            getOption.removeAttribute('disabled');
-            break;
-        case '/v1/operations/{id}':
-            getOption.removeAttribute('disabled');
-            break;
-        case '/v1/operations/cancel/{id}':
-            getOption.removeAttribute('disabled');
-            break;
-        case '/v1/presentations/definitions':
-            getOption.removeAttribute('disabled');
-            putOption.removeAttribute('disabled');
-            break;
-        case '/v1/presentations/definitions/{id}':
-            getOption.removeAttribute('disabled');
-            deleteOption.removeAttribute('disabled');
-            break;
-        case '/v1/presentations/submissions':
-            getOption.removeAttribute('disabled');
-            putOption.removeAttribute('disabled');
-            break;
-        case '/v1/presentations/submissions/{id}':
-            getOption.removeAttribute('disabled');
-            break;
-        case '/v1/presentations/submissions/{id}/review':
-            putOption.removeAttribute('disabled');
-            break;
-        case '/v1/schemas':
-            getOption.removeAttribute('disabled');
-            putOption.removeAttribute('disabled');
-            break;
-        case '/v1/schemas/{id}':
-            getOption.removeAttribute('disabled');
-            deleteOption.removeAttribute('disabled');
-            break;
-        case '/v1/webhooks':
-            getOption.removeAttribute('disabled');
-            putOption.removeAttribute('disabled');
-            break;
-        default:
-            break;
-    }  
 });
 
 
+//Templates
+const issuerDid = sessionStorage.getItem("issuerDID");
+const issuerKid = issuerDid.slice('did:key:'.length);
+const subjectDid = sessionStorage.getItem("subjectDID");
+const schemaId = sessionStorage.getItem("schemaID");
+
+const mockCredentialRequest = {
+    "issuer": issuerDid,
+    "subject": subjectDid,
+    "data": {
+        "firstName": "Test",
+        "lastName": "Subject"
+    },
+    "issuerKid": `#${issuerKid}`
+}
+
+const mockSchemaRequest = {
+    "author": issuerDid,
+    "name": "Test Schema2",
+    "schema": {
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        }
+    },
+    "authorKid": `#${issuerKid}`,
+    "sign": true
+  }
+
+const mockManifestRequest = {
+    "name": "Test Manifest",
+    "description": "Test manifest for demonstration purposes",
+    "format": {
+        "jwt": {
+            "alg":[
+                "EdDSA"
+            ]
+        }
+    },
+    "issuerDid": issuerDid,
+    "issuerKid": `#${issuerKid}`,
+    "outputDescriptors": {
+        "id": "TestManifest1",
+        "schema": schemaId
+    }
+}
+
+
+// Method
+
+const templates = `
+    <label for="template">Populate payload from template</label>
+    <div class="select-area">
+        <select id="template" name="template"></select>
+    </div>
+`;
+const availableTemplates = [
+    'Mock Credential Request',
+    'Mock Manifest Request',
+    'Mock Schema Request',
+    'Custom',
+];
+const populateTemplates = () => {
+    document.querySelector('#template-container').innerHTML = templates;
+    const templateOptions = availableTemplates
+        .map(template => `<option value="${template}">${template.trim()}</option>`)
+        .join('');
+    document.querySelector('#template').innerHTML = defaultOption + templateOptions;
+}
+method.addEventListener('change', (e) => {
+    const onMethodChange = (event) => {
+        {
+            let mockValue = "";
+            switch (event.target.value) {
+                case 'Mock Credential Request':
+                    mockValue = JSON.stringify(mockCredentialRequest, null, 4);
+                    break;
+                case 'Mock Manifest Request':
+                    mockValue = JSON.stringify(mockManifestRequest, null, 4);
+                    break;
+                case 'Mock Schema Request':
+                    mockValue = JSON.stringify(mockSchemaRequest, null, 4);
+                    break;
+                default:
+                    break;
+            }
+            document.querySelector("#body").value = mockValue;
+        }
+    }
+    if (e.target.value === 'PUT') {
+        populateTemplates();
+        document.querySelector("#template").addEventListener('change', onMethodChange);
+    }  else {
+        if (document.querySelector('#template')) {
+            document.querySelector('#template').innerHTML = "";
+            document.querySelector("#template").removeEventListener('change', onMethodChange);
+            document.querySelector('#template-container').innerHTML = '';
+        }
+    }
+    removeQueryParamFieldsFromForm(); 
+})
 
 
 
