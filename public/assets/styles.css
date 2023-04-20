@@ -94,6 +94,14 @@ a.button-anchor:focus,
 button:hover,
 button:focus {
     box-shadow: 0 0 10px 0 var(--color-blue);
+    opacity: 0.9;
+}
+
+a.button-anchor:active,
+a.button-anchor:active,
+button:active,
+button:active {
+    opacity: 0.8;
 }
 
 button.secondary {
@@ -106,7 +114,7 @@ button.secondary:hover,
 button.secondary:focus {
     background: var(--grey-50);
     border-color: var(--color-white);
-    box-shadow: 0 0 10px 0 var(--grey-10);
+    box-shadow: 0 0 10px 0 var(--grey-50);
 }
 
 header,
@@ -149,6 +157,7 @@ footer {
 .playground-intro {
     color: var(--color-yellow);
     display: flex;
+    gap: 2rem;
     align-items: flex-start;
     flex-wrap: wrap;
 }
@@ -196,17 +205,23 @@ p {
     font-size: var(--font-md);
 }
 
+.note-key-value {
+    display: flex;
+    gap: 2rem;
+}
 .note-key,
 .note-value {
     display: inline-block;
     font-size: var(--font-sm);
-    margin-top: 0.25rem;
+    margin-top: 0;
+    margin-bottom: 0.25rem;
 }
 
 .note-value {
     color: var(--grey-50);
     font-weight: 500;
     word-break: break-word;
+    flex: 1;
 }
 
 label,

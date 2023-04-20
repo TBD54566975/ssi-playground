@@ -60,15 +60,15 @@ const displayDIDs = async () => {
       }
   
       didsContainer.innerHTML = `
-        <div>
+        <div class="note-key-value">
           <p class="note-key">Test Issuer</p> 
           <p class="note-value">${sessionStorage.getItem('issuerDID')}</p>
         </div>
-        <div>
+        <div class="note-key-value">
           <p class="note-key">Test Holder</p> 
           <p class="note-value">${sessionStorage.getItem('subjectDID')}</p>
         </div>
-        <div>
+        <div class="note-key-value">
           <p class="note-key">Test Schema</p> 
           <p class="note-value">${sessionStorage.getItem('schemaID')}</p>
         </div>

@@ -13,7 +13,7 @@
                 <img src="assets/tbd-wordmark.svg" alt="TBD logo" width="60"/>
                 <span class="lowercase">Playground</span>
             </div>
-            <a target="_blank" href="https://developer.tbd.website/docs/" class="button-anchor">Read the docs</a>
+            <a target="_blank" href="https://developer.tbd.website/docs/apis/ssi-service/" class="button-anchor">Read the docs</a>
         </header>
         <main>
             <div class="playground-intro">
@@ -32,22 +32,18 @@
                     </div>
                     <form>
                         <div id="method-container">
-                            <!-- <label for="method">Method</label> -->
-                            <!-- <div class="select-area">
-                                <select id="method" name="method" required></select>
-                            </div> -->
                             <fieldset required id="method">
                                 <legend for="method">Method</legend>
                                 <div class="radio-button">
-                                    <input type="radio" id="method-get-radio" name="method" value="GET" checked>
+                                    <input type="radio" id="method-get-radio" name="method" value="GET" checked autocomplete="off">
                                     <label for="method-get-radio">GET</label>
                                 </div>              
                                 <div class="radio-button">
-                                    <input type="radio" id="method-put-radio" name="method" value="PUT">
+                                    <input type="radio" id="method-put-radio" name="method" value="PUT" autocomplete="off">
                                     <label for="method-put-radio">PUT</label>
                                 </div>
                                 <div class="radio-button">
-                                    <input type="radio" id="method-delete-radio" name="method" value="DELETE">
+                                    <input type="radio" id="method-delete-radio" name="method" value="DELETE" autocomplete="off">
                                     <label for="method-delete-radio">DELETE</label>
                                 </div>
                             </fieldset>
@@ -62,11 +58,8 @@
                         <div id="queryParam-container"></div>
                         <div id="queryParamID-container"></div>
                         <div id="template-container"></div>
-                        <div id="body-container">
-                            <label for="body">Body:</label>
-                            <textarea id="body" name="body"></textarea>
-                        </div>
-                        <a target="_blank" href="https://developer.tbd.website/docs/">Read the API docs</a>
+                        <div id="body-container"></div>
+                        <a target="_blank" href="https://developer.tbd.website/docs/apis/ssi-service/">Read the API docs</a>
                         <div class="button-container">
                             <button type="submit">Send</button>
                         </div>

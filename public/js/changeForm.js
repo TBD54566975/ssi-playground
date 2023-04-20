@@ -1,31 +1,31 @@
 const pathParamIDField = `
     <label for="schema">Value for ID</label>
-    <input type="text" id="pathParam-id" name="pathParam-id" placeholder="{id}" required>
+    <input type="text" id="pathParam-id" name="pathParam-id" placeholder="{id}" required autocomplete="off">
 `;
 const filterByRadio = `
     <fieldset required>
         <legend for="filter-by">Filter By:</legend>
         <div class="radio-button">
-            <input type="radio" id="none-radio" name="filter-by" value="none" checked>
+            <input type="radio" id="none-radio" name="filter-by" value="none" checked autocomplete="off">
             <label for="none-radio">None</label>
         </div>              
         <div class="radio-button">
-            <input type="radio" id="issuer-radio" name="filter-by" value="issuer">
+            <input type="radio" id="issuer-radio" name="filter-by" value="issuer" autocomplete="off">
             <label for="issuer-radio">Issuer</label>
         </div>
         <div class="radio-button">
-            <input type="radio" id="subject-radio" name="filter-by" value="subject">
+            <input type="radio" id="subject-radio" name="filter-by" value="subject" autocomplete="off">
             <label for="subject-radio">Subject</label>
         </div>
         <div class="radio-button">
-            <input type="radio" id="schema-radio" name="filter-by" value="schema">
+            <input type="radio" id="schema-radio" name="filter-by" value="schema" autocomplete="off">
             <label for="schema-radio">Schema</label>
         </div>
     </fieldset>
 `;
 const filterByID = `
     <label for="filter-id">ID of resource</label>
-    <input type="text" id="filter-id" name="filter-id" placeholder="xxxxxxxxxxx" required>
+    <input type="text" id="filter-id" name="filter-id" placeholder="xxxxxxxxxxx" required autocomplete="off">
 `;
 const endpoint = document.querySelector('#endpoint');
 const method = document.querySelector('#method');
@@ -87,6 +87,32 @@ endpoint.addEventListener('change', (e) => {
     } else {
         pathParam.innerHTML = '';
     };
+
+    let availableTemplates = [];
+    switch (endpoint.value) {
+        case '/v1/credentials':
+            availableTemplates = [
+                'Mock Credential Request'
+            ];
+            break;
+        case '/v1/manifests':
+            availableTemplates = [
+                'Mock Manifest Request'
+            ];
+            break;
+        case '/v1/schemas':
+            availableTemplates = [
+                'Mock Schema Request'
+            ];
+            break;
+        default:
+            break;
+    } 
+    populateTemplates(availableTemplates);
+
+    if (document.querySelector('#body')) {
+        document.querySelector('#body').value = '';
+    }
 });
 
 
@@ -139,28 +165,25 @@ const mockManifestRequest = {
     }
 }
 
-
 // Method
-
+const body = `
+<label for="body">Body:</label>
+<textarea id="body" name="body"></textarea>
+`;
 const templates = `
     <label for="template">Populate payload from template</label>
     <div class="select-area">
         <select id="template" name="template"></select>
     </div>
 `;
-const availableTemplates = [
-    'Mock Credential Request',
-    'Mock Manifest Request',
-    'Mock Schema Request',
-    'Custom',
-];
-const populateTemplates = () => {
-    document.querySelector('#template-container').innerHTML = templates;
+
+const populateTemplates = (availableTemplates) => {
     const templateOptions = availableTemplates
         .map(template => `<option value="${template}">${template.trim()}</option>`)
         .join('');
     document.querySelector('#template').innerHTML = defaultOption + templateOptions;
 }
+
 method.addEventListener('change', (e) => {
     const onMethodChange = (event) => {
         {
@@ -182,16 +205,21 @@ method.addEventListener('change', (e) => {
         }
     }
     if (e.target.value === 'PUT') {
-        populateTemplates();
+        let availableTemplates = [];
+        document.querySelector('#template-container').innerHTML = templates;
+        populateTemplates(availableTemplates);
+        document.querySelector('#body-container').innerHTML = body;
         document.querySelector("#template").addEventListener('change', onMethodChange);
     }  else {
         if (document.querySelector('#template')) {
             document.querySelector('#template').innerHTML = "";
             document.querySelector("#template").removeEventListener('change', onMethodChange);
-            document.querySelector('#template-container').innerHTML = '';
+            document.querySelector('#template-container').innerHTML = ''; 
         }
+        document.querySelector('#body-container').innerHTML = '';
     }
     removeQueryParamFieldsFromForm(); 
+    pathParam.innerHTML = "";
 })
 
 
