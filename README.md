@@ -9,10 +9,11 @@ The SSI Playground is meant to help orient new faces into the SSI ecosystem. It 
 The only pre-requisite is you need to have Docker [installed](https://docs.docker.com/get-docker/).
 
 ## Getting Started
+1. Run `npm i` to install dependencies.
 
-Use `npm start` to start running the playground locally. 
+2. Run `npm start` to start running the playground locally. 
 
-Open your browser to [http://localhost:8081](http://localhost:8081).
+3. Open your browser to [http://localhost:8081](http://localhost:8081).
 
 ### Cleanup 
 Use `npm run cleanup` to remove the SSI Service Docker container. Test data is stored in session storage. It's a good idea to end a browser sesssion before running `npm run cleanup`.
