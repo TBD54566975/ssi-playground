@@ -16,7 +16,7 @@ const fetchDID = async () => {
 
 const fetchSchemaID = async () => {
   const issuerDid = sessionStorage.getItem("issuerDID");
-  const issuerKid = issuerDid.slice('did:key:'.length);
+  // const issuerKid = issuerDid.slice('did:key:'.length);
 
   const response = await fetch('/v1/schemas', {
     method: 'PUT',
@@ -34,7 +34,7 @@ const fetchSchemaID = async () => {
             "type": "string"
           }
       },
-      "authorKid": `#${issuerKid}`,
+      // "authorKid": `#${issuerKid}`,
       "sign": true
     })
   });

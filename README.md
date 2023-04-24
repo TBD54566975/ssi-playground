@@ -4,13 +4,18 @@ The SSI Playground is meant to help orient new faces into the SSI ecosystem.
 
 ## Introduction
 
-It relies on the [SSI Service](https://github.com/TBD54566975/ssi-service), so make sure to get that project pulled down and running locally. 
+The SSI Playground is meant to help orient new faces into the SSI ecosystem. It consumes the [SSI Service](https://github.com/TBD54566975/ssi-service). 
 
-Once you've followed the steps to get SSI Service running locally, you can run this playground.
+The only pre-requisite is you need to have Docker [installed](https://docs.docker.com/get-docker/).
 
 ## Getting Started
 
 Use `npm start` to start running the playground locally. 
+
+Open your browser to [http://localhost:8081](http://localhost:8081).
+
+### Cleanup 
+Use `npm run cleanup` to remove the SSI Service Docker container. Test data is stored in session storage. It's a good idea to end a browser sesssion before running `npm run cleanup`.
 
 ## Add mock payload templates
 

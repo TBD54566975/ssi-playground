@@ -124,21 +124,23 @@ endpoint.addEventListener('change', () => {
         }
     }
 
+    if (document.querySelector('#method-put-radio').checked) {
+        if (mockTemplates[endpoint.value]) {
+            document.querySelector('#template-container').innerHTML = templates;
+            const templateOptions = mockTemplates[endpoint.value]
+                .map(template => `<option value="${template}">${template.trim()}</option>`)
+                .join('');
+            document.querySelector('#template').innerHTML = defaultOption + templateOptions;
+        } else {
+            document.querySelector('#template-container').innerHTML = "";
+        }
+    }
+
     if(endpoint.value.includes('{id}')) {
         pathParam.innerHTML = pathParamIDField;
     } else {
         pathParam.innerHTML = '';
     };
-
-    if (mockTemplates[endpoint.value]) {
-        document.querySelector('#template-container').innerHTML = templates;
-        const templateOptions = mockTemplates[endpoint.value]
-            .map(template => `<option value="${template}">${template.trim()}</option>`)
-            .join('');
-        document.querySelector('#template').innerHTML = defaultOption + templateOptions;
-    } else {
-        document.querySelector('#template-container').innerHTML = "";
-    }
 
     if (document.querySelector('#body')) {
         document.querySelector('#body').value = "";

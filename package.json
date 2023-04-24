@@ -4,7 +4,8 @@
   "description": "playground for experimenting with the ssi service",
   "main": "index.js",
   "scripts": {
-    "start": "node ."
+    "start": "docker-compose -f ssi-service-compose/ssi-service-compose.yml up & node .",
+    "cleanup": "docker-compose -f ssi-service-compose/ssi-service-compose.yml down"
   },
   "repository": {
     "type": "git",

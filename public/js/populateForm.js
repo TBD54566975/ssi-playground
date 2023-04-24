@@ -10,10 +10,10 @@ const getOptions = [
     '/v1/dids',
     '/v1/dids/key',
     '/v1/dids/web',
-    '/v1/dids/ion',
+    // '/v1/dids/ion',
     '/v1/dids/key/{id}',
     '/v1/dids/web/{id}',
-    '/v1/dids/ion/{id}',
+    // '/v1/dids/ion/{id}',
     '/v1/dids/resolver/{id}',
     '/v1/issuancetemplates/{id}',
     '/v1/keys/{id}',
@@ -48,7 +48,7 @@ const putOptions = [
     '/v1/presentations/submissions',
     '/v1/presentations/submissions/{id}/review',
     '/v1/schemas',
-    '/v1/webhooks'
+    // '/v1/webhooks'
 ];
 
 const deleteOptions = [

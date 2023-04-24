@@ -1,5 +1,5 @@
 const issuerDid = sessionStorage.getItem("issuerDID");
-const issuerKid = issuerDid.slice('did:key:'.length);
+// const issuerKid = issuerDid?.slice('did:key:'.length);
 const subjectDid = sessionStorage.getItem("subjectDID");
 const schemaId = sessionStorage.getItem("schemaID");
 
@@ -10,7 +10,7 @@ export const mockCredentialRequest = {
         "firstName": "Test",
         "lastName": "Subject"
     },
-    "issuerKid": `#${issuerKid}`
+    // "issuerKid": `#${issuerKid}`
 }
 
 export const mockManifestRequest = {
@@ -24,7 +24,7 @@ export const mockManifestRequest = {
         }
     },
     "issuerDid": issuerDid,
-    "issuerKid": `#${issuerKid}`,
+    // "issuerKid": `#${issuerKid}`,
     "outputDescriptors": {
         "id": "TestManifest1",
         "schema": schemaId
@@ -42,6 +42,6 @@ export const mockSchemaRequest = {
           "type": "string"
         }
     },
-    "authorKid": `#${issuerKid}`,
+    // "authorKid": `#${issuerKid}`,
     "sign": true
 }
