@@ -177,12 +177,12 @@ footer {
 }
 
 .playground-area section {
-    flex: 1;
+    flex: 1 1 25%;
     border: 1px solid var(--grey-15);
     background: var(--grey-5);
     border-radius: var(--radius-sm);
     padding: 1.5rem;
-    max-width: 50%;
+    width: 50%;
 }
 
 .section-header {

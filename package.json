@@ -4,7 +4,7 @@
   "description": "playground for experimenting with the ssi service",
   "main": "index.js",
   "scripts": {
-    "start": "http-server -p 8081"
+    "start": "node ."
   },
   "repository": {
     "type": "git",

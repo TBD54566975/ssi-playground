@@ -1,3 +1,27 @@
+import {
+    mockCredentialRequest,
+    mockManifestRequest,
+    mockSchemaRequest
+} from "./_mocks.js";
+
+const mockTemplates = {
+    '/v1/credentials': [
+        'Mock Credential Request'
+    ],
+    '/v1/manifests': [
+        'Mock Manifest Request'
+    ],
+    '/v1/schemas': [
+        'Mock Schema Request'
+    ],
+}
+
+const mockPayloads = {
+    'Mock Credential Request': mockCredentialRequest,
+    'Mock Manifest Request': mockManifestRequest,
+    'Mock Schema Request': mockSchemaRequest
+}
+
 const pathParamIDField = `
     <label for="schema">Value for ID</label>
     <input type="text" id="pathParam-id" name="pathParam-id" placeholder="{id}" required autocomplete="off">
@@ -26,6 +50,18 @@ const filterByRadio = `
 const filterByID = `
     <label for="filter-id">ID of resource</label>
     <input type="text" id="filter-id" name="filter-id" placeholder="xxxxxxxxxxx" required autocomplete="off">
+`;
+
+const templates = `
+    <label for="template">Populate payload from template</label>
+    <div class="select-area">
+        <select id="template" name="template"></select>
+    </div>
+`;
+
+const body = `
+    <label for="body">Body:</label>
+    <textarea id="body" name="body"></textarea>
 `;
 const endpoint = document.querySelector('#endpoint');
 const method = document.querySelector('#method');
@@ -72,8 +108,14 @@ const removeQueryParamFieldsFromForm = () => {
     queryParamID.innerHTML = '';
 }
 
-endpoint.addEventListener('change', (e) => {
+const setTemplateInBodyField = (event) => {
+    const mockValue = JSON.stringify(mockPayloads[event.target.value] || "", null, 4);
+    document.querySelector("#body").value = mockValue;
+}
 
+
+//Endpoint
+endpoint.addEventListener('change', () => {
     if (document.querySelector('#method-get-radio').checked) {
         if (endpoint.value === '/v1/credentials' || endpoint.value === '/v1/manifests') {
             addQueryParamFieldsToForm();
@@ -88,135 +130,30 @@ endpoint.addEventListener('change', (e) => {
         pathParam.innerHTML = '';
     };
 
-    let availableTemplates = [];
-    switch (endpoint.value) {
-        case '/v1/credentials':
-            availableTemplates = [
-                'Mock Credential Request'
-            ];
-            break;
-        case '/v1/manifests':
-            availableTemplates = [
-                'Mock Manifest Request'
-            ];
-            break;
-        case '/v1/schemas':
-            availableTemplates = [
-                'Mock Schema Request'
-            ];
-            break;
-        default:
-            break;
-    } 
-    populateTemplates(availableTemplates);
+    if (mockTemplates[endpoint.value]) {
+        document.querySelector('#template-container').innerHTML = templates;
+        const templateOptions = mockTemplates[endpoint.value]
+            .map(template => `<option value="${template}">${template.trim()}</option>`)
+            .join('');
+        document.querySelector('#template').innerHTML = defaultOption + templateOptions;
+    } else {
+        document.querySelector('#template-container').innerHTML = "";
+    }
 
     if (document.querySelector('#body')) {
-        document.querySelector('#body').value = '';
+        document.querySelector('#body').value = "";
     }
 });
 
-
-//Templates
-const issuerDid = sessionStorage.getItem("issuerDID");
-const issuerKid = issuerDid.slice('did:key:'.length);
-const subjectDid = sessionStorage.getItem("subjectDID");
-const schemaId = sessionStorage.getItem("schemaID");
-
-const mockCredentialRequest = {
-    "issuer": issuerDid,
-    "subject": subjectDid,
-    "data": {
-        "firstName": "Test",
-        "lastName": "Subject"
-    },
-    "issuerKid": `#${issuerKid}`
-}
-
-const mockSchemaRequest = {
-    "author": issuerDid,
-    "name": "Test Schema2",
-    "schema": {
-        "firstName": {
-          "type": "string"
-        },
-        "lastName": {
-          "type": "string"
-        }
-    },
-    "authorKid": `#${issuerKid}`,
-    "sign": true
-  }
-
-const mockManifestRequest = {
-    "name": "Test Manifest",
-    "description": "Test manifest for demonstration purposes",
-    "format": {
-        "jwt": {
-            "alg":[
-                "EdDSA"
-            ]
-        }
-    },
-    "issuerDid": issuerDid,
-    "issuerKid": `#${issuerKid}`,
-    "outputDescriptors": {
-        "id": "TestManifest1",
-        "schema": schemaId
-    }
-}
-
 // Method
-const body = `
-<label for="body">Body:</label>
-<textarea id="body" name="body"></textarea>
-`;
-const templates = `
-    <label for="template">Populate payload from template</label>
-    <div class="select-area">
-        <select id="template" name="template"></select>
-    </div>
-`;
-
-const populateTemplates = (availableTemplates) => {
-    const templateOptions = availableTemplates
-        .map(template => `<option value="${template}">${template.trim()}</option>`)
-        .join('');
-    document.querySelector('#template').innerHTML = defaultOption + templateOptions;
-}
-
 method.addEventListener('change', (e) => {
-    const onMethodChange = (event) => {
-        {
-            let mockValue = "";
-            switch (event.target.value) {
-                case 'Mock Credential Request':
-                    mockValue = JSON.stringify(mockCredentialRequest, null, 4);
-                    break;
-                case 'Mock Manifest Request':
-                    mockValue = JSON.stringify(mockManifestRequest, null, 4);
-                    break;
-                case 'Mock Schema Request':
-                    mockValue = JSON.stringify(mockSchemaRequest, null, 4);
-                    break;
-                default:
-                    break;
-            }
-            document.querySelector("#body").value = mockValue;
-        }
-    }
     if (e.target.value === 'PUT') {
-        let availableTemplates = [];
-        document.querySelector('#template-container').innerHTML = templates;
-        populateTemplates(availableTemplates);
         document.querySelector('#body-container').innerHTML = body;
-        document.querySelector("#template").addEventListener('change', onMethodChange);
+        document.querySelector("#template-container").addEventListener('change', setTemplateInBodyField);
     }  else {
-        if (document.querySelector('#template')) {
-            document.querySelector('#template').innerHTML = "";
-            document.querySelector("#template").removeEventListener('change', onMethodChange);
-            document.querySelector('#template-container').innerHTML = ''; 
-        }
-        document.querySelector('#body-container').innerHTML = '';
+        document.querySelector("#template-container").removeEventListener('change', setTemplateInBodyField);
+        document.querySelector('#template-container').innerHTML = ""; 
+        document.querySelector('#body-container').innerHTML = "";
     }
     removeQueryParamFieldsFromForm(); 
     pathParam.innerHTML = "";
