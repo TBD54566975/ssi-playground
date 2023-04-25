@@ -20,7 +20,7 @@ Anyone from the community is welcome (and encouraged!) to raise issues via
 
 ### Discussions
 
-Design discussions and proposals take place on our [discussion forums](https://forums.tbd.website).
+Design discussions and proposals take place on our [discord](https://discord.gg/tbd).
 
 We advocate an asynchronous, written debate model - so write up your thoughts and invite the community to join in!
 
