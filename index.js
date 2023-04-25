@@ -21,7 +21,7 @@ const server = http.createServer((req, res) => {
 
     fs.readFile(filePath, (err, data) => {
       if (err) {
-        proxy.web(req, res, { target: 'http://localhost:8080' });
+        proxy.web(req, res, { target: process.env.API_URL || 'http://localhost:8080' });
         return;
       }
 
