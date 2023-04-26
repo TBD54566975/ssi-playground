@@ -44,38 +44,39 @@ const fetchSchemaID = async () => {
 
 const displayDIDs = async () => {
     try {
-      if (!sessionStorage.getItem('issuerDID')) {
-        const issuer = await fetchDID();
-        sessionStorage.setItem('issuerDID', issuer.did.id);
-      }
+        if (!sessionStorage.getItem('issuerDID')) {
+            const issuer = await fetchDID();
+            sessionStorage.setItem('issuerDID', issuer.did.id);
+            sessionStorage.setItem('issuerKID', issuer.did.id?.slice('did:key:'.length));
+        }
 
-      if (!sessionStorage.getItem('subjectDID')) {
-        const subject = await fetchDID();
-        sessionStorage.setItem('subjectDID', subject.did.id);
-      }
+        if (!sessionStorage.getItem('subjectDID')) {
+            const subject = await fetchDID();
+            sessionStorage.setItem('subjectDID', subject.did.id);
+        }
 
-      if (!sessionStorage.getItem('schemaID')) {
-        const schema = await fetchSchemaID();
-        sessionStorage.setItem('schemaID', schema.id);
-      }
-  
-      didsContainer.innerHTML = `
-        <div class="note-key-value">
-          <p class="note-key">Test Issuer</p> 
-          <p class="note-value">${sessionStorage.getItem('issuerDID')}</p>
-        </div>
-        <div class="note-key-value">
-          <p class="note-key">Test Holder</p> 
-          <p class="note-value">${sessionStorage.getItem('subjectDID')}</p>
-        </div>
-        <div class="note-key-value">
-          <p class="note-key">Test Schema</p> 
-          <p class="note-value">${sessionStorage.getItem('schemaID')}</p>
-        </div>
-      `;
+        if (!sessionStorage.getItem('schemaID')) {
+            const schema = await fetchSchemaID();
+            sessionStorage.setItem('schemaID', schema.id);
+        }
+    
+        didsContainer.innerHTML = `
+            <div class="note-key-value">
+            <p class="note-key">Test Issuer</p> 
+            <p class="note-value">${sessionStorage.getItem('issuerDID')}</p>
+            </div>
+            <div class="note-key-value">
+            <p class="note-key">Test Holder</p> 
+            <p class="note-value">${sessionStorage.getItem('subjectDID')}</p>
+            </div>
+            <div class="note-key-value">
+            <p class="note-key">Test Schema</p> 
+            <p class="note-value">${sessionStorage.getItem('schemaID')}</p>
+            </div>
+        `;
     } catch (error) {
-      console.error(error);
-      didsContainer.innerHTML = '<p>Failed to load test data.</p>';
+        console.error(error);
+        didsContainer.innerHTML = '<p>Failed to load test data.</p>';
     }
 };
 

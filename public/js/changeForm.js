@@ -1,7 +1,5 @@
 import {
-    mockCredentialRequest,
-    mockManifestRequest,
-    mockSchemaRequest
+    getMocks
 } from "./_mocks.js";
 
 const mockTemplates = {
@@ -14,12 +12,6 @@ const mockTemplates = {
     '/v1/schemas': [
         'Mock Schema Request'
     ],
-}
-
-const mockPayloads = {
-    'Mock Credential Request': mockCredentialRequest,
-    'Mock Manifest Request': mockManifestRequest,
-    'Mock Schema Request': mockSchemaRequest
 }
 
 const pathParamIDField = `
@@ -109,7 +101,7 @@ const removeQueryParamFieldsFromForm = () => {
 }
 
 const setTemplateInBodyField = (event) => {
-    const mockValue = JSON.stringify(mockPayloads[event.target.value] || "", null, 4);
+    const mockValue = JSON.stringify(getMocks()[event.target.value]|| "", null, 4);
     document.querySelector("#body").value = mockValue;
 }
 

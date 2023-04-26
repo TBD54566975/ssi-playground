@@ -1,47 +1,52 @@
-const issuerDid = sessionStorage.getItem("issuerDID");
-const issuerKid = issuerDid?.slice('did:key:'.length);
-const subjectDid = sessionStorage.getItem("subjectDID");
-const schemaId = sessionStorage.getItem("schemaID");
+export const getMocks = () => {
+    const { issuerDID, issuerKID, subjectDID, schemaID } = sessionStorage;
 
-export const mockCredentialRequest = {
-    "issuer": issuerDid,
-    "subject": subjectDid,
-    "data": {
-        "firstName": "Test",
-        "lastName": "Subject"
-    },
-    "issuerKid": `#${issuerKid}`
-}
-
-export const mockManifestRequest = {
-    "name": "Test Manifest",
-    "description": "Test manifest for demonstration purposes",
-    "format": {
-        "jwt": {
-            "alg":[
-                "EdDSA"
-            ]
-        }
-    },
-    "issuerDid": issuerDid,
-    "issuerKid": `#${issuerKid}`,
-    "outputDescriptors": {
-        "id": "TestManifest1",
-        "schema": schemaId
-    }
-}
-
-export const mockSchemaRequest = {
-    "author": issuerDid,
-    "name": "Test Schema2",
-    "schema": {
-        "firstName": {
-          "type": "string"
+    let mockCredentialRequest = {
+        "issuer": issuerDID,
+        "subject": subjectDID,
+        "data": {
+            "firstName": "Test",
+            "lastName": "Subject"
         },
-        "lastName": {
-          "type": "string"
+        "issuerKid": `#${issuerKID}`
+    }
+
+    let mockManifestRequest = {
+        "name": "Test Manifest",
+        "description": "Test manifest for demonstration purposes",
+        "format": {
+            "jwt": {
+                "alg":[
+                    "EdDSA"
+                ]
+            }
+        },
+        "issuerDid": issuerDID,
+        "issuerKid": `#${issuerKID}`,
+        "outputDescriptors": {
+            "id": "TestManifest1",
+            "schema": schemaID
         }
-    },
-    "authorKid": `#${issuerKid}`,
-    "sign": true
-}
+    }
+
+    let mockSchemaRequest = {
+        "author": issuerDID,
+        "name": "Test Schema2",
+        "schema": {
+            "firstName": {
+            "type": "string"
+            },
+            "lastName": {
+            "type": "string"
+            }
+        },
+        "authorKid": `#${issuerKID}`,
+        "sign": true
+    }
+
+    return {
+        'Mock Credential Request': mockCredentialRequest,
+        'Mock Manifest Request': mockManifestRequest,
+        'Mock Schema Request': mockSchemaRequest
+    }
+};
