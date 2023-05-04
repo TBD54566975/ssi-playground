@@ -1,12 +1,14 @@
 title = "SSI Service Config"
 
 svn = "0.0.1"
-desc = "Default configuration to be used while running the service as a single go process."
+desc = "Configuration to be used while running the service with docker compose."
 
 # http service configuration
 [server]
 api_host = "0.0.0.0:3000"
 debug_host = "0.0.0.0:4000"
+jager_host = "http://jaeger:14268/api/traces"
+jager_enabled = true
 
 # 5 seconds, time is in nanoseconds
 read_timeout = 5000000000
@@ -15,7 +17,7 @@ shutdown_timeout = 5000000000
 
 log_location = "logs"
 # options: trace, debug, info, warning, error, fatal, panic
-log_level = "debug"
+log_level = "info"
 
 enable_schema_caching = true
 enable_allow_all_cors = true
@@ -40,14 +42,14 @@ password = "default-password"
 
 [services.did]
 name = "did"
-methods = ["key", "web"]
-resolution_methods = ["key", "web", "pkh", "peer"]
+methods = ["key", "web", "ion"]
+local_resolution_methods = ["key", "web", "pkh", "peer"]
+universal_resolver_url = "http://uni-resolver-web:8080"
+universal_resolver_methods = ["ion"]
+ion_resolver_url = "https://tbdwebsiteonline.com"
 
 [services.schema]
 name = "schema"
-
-[services.issuing]
-name = "issuing"
 
 [services.credential]
 name = "credential"
@@ -55,5 +57,6 @@ name = "credential"
 [services.manifest]
 name = "manifest"
 
-[services.presentation]
-name = "presentation"
+[services.webhook]
+name = "webhook"
+webhook_timeout = "10s"
