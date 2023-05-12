@@ -11,6 +11,11 @@ export const getMocks = () => {
         "issuerKid": `#${issuerKID}`
     }
 
+    let mockCredentialStatusRequest = {
+        "revoked": true,
+        "suspended": true
+    }
+
     let mockManifestRequest = {
         "name": "Test Manifest",
         "description": "Test manifest for demonstration purposes",
@@ -46,6 +51,7 @@ export const getMocks = () => {
 
     return {
         'Mock Credential Request': mockCredentialRequest,
+        'Mock Credential Status Request': mockCredentialStatusRequest,
         'Mock Manifest Request': mockManifestRequest,
         'Mock Schema Request': mockSchemaRequest
     }
