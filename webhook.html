@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Webhook Demo</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+        <link rel="stylesheet" type="text/css" href="assets/styles.css">
+    </head>
+    <body>
+        <header>
+            <div>
+                <div class="header-logo">
+                    <span class="lowercase">Webhook Demo</span>
+                </div>
+            </div>
+            <div>
+                <a target="_blank" href="https://developer.tbd.website/docs/apis/ssi-service/" class="button-anchor">Docs</a>
+            </div>
+        </header>
+        <main>
+            <div class="playground-intro">
+                <h1>WorkYay!</h1>
+                <p>Webhook demo for WorkYay</p>
+            </div>
+            <div class="playground-area">
+                <section>
+                    <div class="section-header">
+                        <h2>Webhook Recieved</h2>
+                    </div>
+                    <div id="output-container">
+                        <pre id="output">{WEBHOOKS}</pre>
+                    </div>
+                    <div class="button-container">
+                        <button type="reset" id="reset-button" class="secondary">Reset</button>
+                    </div>
+                </section>
+                <section>
+                    <div class="section-header">
+                        <h2>Badge From VC</h2>
+                    </div>
+                    <div id="output-container">
+                        <pre id="output">{BADGES}</pre>
+                    </div>
+                    <div class="button-container">
+                        <button type="reset" id="reset-button" class="secondary">Reset</button>
+                    </div>
+                </section>
+            </div>
+        </main>
+        <footer>
+            <a target="_blank" href="https://github.com/TBD54566975/ssi-playground">Github</a>
+            <a target="_blank" href="https://www.tbd.website/">tbd.website</a>
+        </footer>
+        <script src="js/populateTestData.js"></script>
+        <script src="js/populateForm.js"></script>
+        <script type="module" src="js/changeForm.js"></script>
+        <script src="js/submitForm.js"></script>
+    </body>
+</html>

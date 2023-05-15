@@ -3,6 +3,12 @@ import {
 } from "./_mocks.js";
 
 const mockTemplates = {
+    '/v1/dids/key': [
+        'Mock DID:Key Request'
+    ],
+    '/v1/dids/web': [
+        'Mock DID:Web Request'
+    ],
     '/v1/credentials': [
         'Mock Credential Request'
     ],
@@ -11,6 +17,10 @@ const mockTemplates = {
     ],
     '/v1/schemas': [
         'Mock Schema Request'
+    ],
+    '/v1/webhooks': [
+        'Mock DID Webhook Request',
+        'Mock Credential Webhook Request'
     ],
 }
 
@@ -101,7 +111,7 @@ const removeQueryParamFieldsFromForm = () => {
 }
 
 const setTemplateInBodyField = (event) => {
-    const mockValue = JSON.stringify(getMocks()[event.target.value]|| "", null, 4);
+    const mockValue = JSON.stringify(getMocks()[event.target.value] || "", null, 4);
     document.querySelector("#body").value = mockValue;
 }
 
@@ -112,7 +122,7 @@ endpoint.addEventListener('change', () => {
         if (endpoint.value === '/v1/credentials' || endpoint.value === '/v1/manifests') {
             addQueryParamFieldsToForm();
         } else {
-            removeQueryParamFieldsFromForm(); 
+            removeQueryParamFieldsFromForm();
         }
     }
 
@@ -128,7 +138,7 @@ endpoint.addEventListener('change', () => {
         }
     }
 
-    if(endpoint.value.includes('{id}')) {
+    if (endpoint.value.includes('{id}')) {
         pathParam.innerHTML = pathParamIDField;
     } else {
         pathParam.innerHTML = '';
@@ -144,12 +154,12 @@ method.addEventListener('change', (e) => {
     if (e.target.value === 'PUT') {
         document.querySelector('#body-container').innerHTML = body;
         document.querySelector("#template-container").addEventListener('change', setTemplateInBodyField);
-    }  else {
+    } else {
         document.querySelector("#template-container").removeEventListener('change', setTemplateInBodyField);
-        document.querySelector('#template-container').innerHTML = ""; 
+        document.querySelector('#template-container').innerHTML = "";
         document.querySelector('#body-container').innerHTML = "";
     }
-    removeQueryParamFieldsFromForm(); 
+    removeQueryParamFieldsFromForm();
     pathParam.innerHTML = "";
 })
 
