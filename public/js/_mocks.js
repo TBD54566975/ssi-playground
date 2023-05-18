@@ -8,12 +8,12 @@ export const getMocks = () => {
             "firstName": "Test",
             "lastName": "Subject"
         },
-        "issuerKid": `#${issuerKID}`
+        "issuerKid": `#${issuerKID}`,
+        "revocable": true
     }
 
     let mockCredentialStatusRequest = {
-        "revoked": true,
-        "suspended": true
+        "revoked": true
     }
 
     let mockManifestRequest = {
