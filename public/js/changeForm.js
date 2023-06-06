@@ -3,6 +3,12 @@ import {
 } from "./_mocks.js";
 
 const mockTemplates = {
+    '/v1/dids/key': [
+        'Mock DID:Key Request'
+    ],
+    '/v1/dids/web': [
+        'Mock DID:Web Request'
+    ],
     '/v1/credentials': [
         'Mock Credential Request'
     ],
@@ -10,10 +16,17 @@ const mockTemplates = {
         'Mock Credential Status Request'
     ],
     '/v1/manifests': [
-        'Mock Manifest Request'
+        'Mock Manifest Request',
+        'Mock KYC Manifest Request',
+        'Mock VCIA Manifest Request'
     ],
     '/v1/schemas': [
-        'Mock Schema Request'
+        'Mock Schema Request',
+        'Mock KYC Schema Request'
+    ],
+    '/v1/webhooks': [
+        'Mock DID Webhook Request',
+        'Mock Credential Webhook Request'
     ],
 }
 
