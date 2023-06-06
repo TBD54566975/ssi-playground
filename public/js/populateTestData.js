@@ -16,7 +16,7 @@ const fetchDID = async () => {
 
 const fetchSchemaID = async () => {
   const issuerDid = sessionStorage.getItem("issuerDID");
-  const issuerKid = issuerDid.slice('did:key:'.length);
+  const issuerKid = sessionStorage.getItem("issuerKID");
 
   const response = await fetch('/v1/schemas', {
     method: 'PUT',
@@ -24,18 +24,14 @@ const fetchSchemaID = async () => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      "author": issuerDid,
+      "issuer": issuerDid,
+      "issuerKid": issuerKid,
       "name": "Test Schema2",
       "schema": {
-          "firstName": {
-            "type": "string"
-          },
-          "lastName": {
-            "type": "string"
-          }
-      },
-      "authorKid": `#${issuerKid}`,
-      "sign": true
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "firstName": "string",
+          "lastName": "string"
+      }
     })
   });
 
@@ -47,17 +43,14 @@ const displayDIDs = async () => {
         if (!sessionStorage.getItem('issuerDID')) {
             const issuer = await fetchDID();
             sessionStorage.setItem('issuerDID', issuer.did.id);
-            sessionStorage.setItem('issuerKID', issuer.did.id?.slice('did:key:'.length));
+            sessionStorage.setItem('issuerKID', `${issuer.did.id}#${issuer.did.id?.slice('did:key:'.length)}`);
+            const schema = await fetchSchemaID();
+            sessionStorage.setItem('schemaID', schema.id);
         }
 
         if (!sessionStorage.getItem('subjectDID')) {
             const subject = await fetchDID();
             sessionStorage.setItem('subjectDID', subject.did.id);
-        }
-
-        if (!sessionStorage.getItem('schemaID')) {
-            const schema = await fetchSchemaID();
-            sessionStorage.setItem('schemaID', schema.id);
         }
     
         didsContainer.innerHTML = `

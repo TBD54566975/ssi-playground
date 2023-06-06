@@ -19,7 +19,7 @@ export const getMocks = () => {
             "firstName": "Test",
             "lastName": "Subject"
         },
-        "issuerKid": `#${issuerKID}`,
+        "issuerKid": issuerKID,
         "revocable": true
     }
 
@@ -305,7 +305,7 @@ export const getMocks = () => {
             }
         },
         "issuerDid": issuerDID,
-        "issuerKid": `#${issuerKID}`,
+        "issuerKid": issuerKID,
         "outputDescriptors": {
             "id": "TestManifest1",
             "schema": schemaID
@@ -323,7 +323,7 @@ export const getMocks = () => {
                 "type": "string"
             }
         },
-        "authorKid": `#${issuerKID}`,
+        "authorKid": issuerKID,
         "sign": true
     }
 
