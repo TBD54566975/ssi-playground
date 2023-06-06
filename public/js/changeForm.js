@@ -6,6 +6,9 @@ const mockTemplates = {
     '/v1/credentials': [
         'Mock Credential Request'
     ],
+    '/v1/credentials/{id}/status': [
+        'Mock Credential Status Request'
+    ],
     '/v1/manifests': [
         'Mock Manifest Request'
     ],
