@@ -43,7 +43,7 @@ const displayDIDs = async () => {
         if (!sessionStorage.getItem('issuerDID')) {
             const issuer = await fetchDID();
             sessionStorage.setItem('issuerDID', issuer.did.id);
-            sessionStorage.setItem('issuerKID', `${issuer.did.id}#${issuer.did.id?.slice('did:key:'.length)}`);
+            sessionStorage.setItem('issuerKID', issuer.did.verificationMethod.find(method => method.controller === issuer.did.id)?.id);
             const schema = await fetchSchemaID();
             sessionStorage.setItem('schemaID', schema.id);
         }
