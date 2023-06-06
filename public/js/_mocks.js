@@ -19,7 +19,7 @@ export const getMocks = () => {
             "firstName": "Test",
             "lastName": "Subject"
         },
-        "issuerKid": `#${issuerKID}`,
+        "issuerKid": issuerKID,
         "revocable": true
     }
 
@@ -305,7 +305,7 @@ export const getMocks = () => {
             }
         },
         "issuerDid": issuerDID,
-        "issuerKid": `#${issuerKID}`,
+        "issuerKid": issuerKID,
         "outputDescriptors": {
             "id": "TestManifest1",
             "schema": schemaID
@@ -313,74 +313,36 @@ export const getMocks = () => {
     }
 
     let mockSchemaRequest = {
-        "author": issuerDID,
         "name": "Test Schema2",
+        "description": "Test description",
         "schema": {
-            "firstName": {
-                "type": "string"
-            },
-            "lastName": {
-                "type": "string"
-            }
-        },
-        "authorKid": `#${issuerKID}`,
-        "sign": true
+            "$schema": "https://json-schema.org/draft/2020-12/schema",
+            "firstName": "string",
+            "lastName": "string"
+        }
     }
 
     let mockKYCSchemaRequest = {
-        "author":issuerDID,
+        "issuer": issuerDID,
+        "issuerKid": issuerKID,
         "name":"KYC",
+        "description":"KYC Schema",
         "schema":{
-          "$id":"kyc-schema-1.0",
-          "$schema":"https://json-schema.org/draft/2020-12/schema",
-          "description":"KYC Schema",
-          "type":"object",
-          "properties":{
-            "id":{
-              "type":"string"
-            },
-            "givenName":{
-              "type":"string"
-            },
-            "additionalName":{
-              "type":"string"
-            },
-            "familyName":{
-              "type":"string"
-            },
-            "birthDate":{
-              "type":"string"
-            },
+            "$schema":"https://json-schema.org/draft/2020-12/schema",
+            "id":"string",
+            "givenName":"string",
+            "additionalName":"string",
+            "familyName":"string",
+            "birthDate":"string",
             "postalAddress":{
-              "type":"object",
-              "properties":{
-                "addressCountry":{
-                  "type":"string"
-                },
-                "addressLocality":{
-                  "type":"string"
-                },
-                "addressRegion":{
-                  "type":"string"
-                },
-                "postalCode":{
-                  "type":"string"
-                },
-                "streetAddress":{
-                  "type":"string"
-                }
-              }
+                "addressCountry":"string",
+                "addressLocality":"string",
+                "addressRegion":"string",
+                "postalCode":"string",
+                "streetAddress":"string"
             },
-            "taxID":{
-              "type":"string"
-            }
-          },
-          "required":[
-      
-          ],
-          "additionalProperties":false
-        },
-        "sign":false
+            "taxID":"string"
+        }
       }
 
     let mockCredentialWebhookRequest = {

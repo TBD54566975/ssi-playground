@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "docker-compose -f ssi-service-compose/ssi-service-compose.yml up & node .",
-    "cleanup": "docker-compose -f ssi-service-compose/ssi-service-compose.yml down"
+    "cleanup": "docker-compose -f ssi-service-compose/ssi-service-compose.yml down",
+    "pull-service": "docker pull ghcr.io/tbd54566975/ssi-service:main"
   },
   "repository": {
     "type": "git",
