@@ -152,7 +152,7 @@ export const getMocks = () => {
       }
 
 
-    let vciaManifstRequest = {
+    let vciaManifestRequest = {
         "name":"Identity Assurance Credential Application",
         "description":"This application is for an identity Assurance credential, which may be used to prove your identity.",
         "issuerDid":"did:web:tbd.website",
@@ -399,7 +399,8 @@ export const getMocks = () => {
         'Mock Credential Request': mockCredentialRequest,
         'Mock Credential Status Request': mockCredentialStatusRequest,
         'Mock Manifest Request': mockManifestRequest,
-        'Mock VCIA Manifest Request': vciaManifstRequest,
+        'Mock KYC Manifest Request': mockKYCManifestRequest,
+        'Mock VCIA Manifest Request': vciaManifestRequest,
         'Mock Schema Request': mockSchemaRequest,
         'Mock KYC Schema Request': mockKYCSchemaRequest,
         'Mock DID:Key Request': mockDIDKey,

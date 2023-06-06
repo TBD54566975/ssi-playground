@@ -17,6 +17,7 @@ const mockTemplates = {
     ],
     '/v1/manifests': [
         'Mock Manifest Request',
+        'Mock KYC Manifest Request',
         'Mock VCIA Manifest Request'
     ],
     '/v1/schemas': [
